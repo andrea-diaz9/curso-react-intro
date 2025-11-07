@@ -5,11 +5,6 @@ function TodoBuscador({
   searchValue,
   setSearchValue
 }) {
-  
-
-
-  console.log('Buscaste', searchValue)
-
   return (
     <input placeholder="Cortar cebolla"
       className='TodoBuscador'
