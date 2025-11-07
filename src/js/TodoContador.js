@@ -1,4 +1,4 @@
-import './TodoContador.css'
+import '../css/TodoContador.css'
 
 function TodoContador( {total, completado} ){ //puede recibir props con el nombre que queramos
   return(
