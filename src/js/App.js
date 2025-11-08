@@ -14,22 +14,34 @@ import React from "react";
 localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));  
 */
 
+function useLocalStorage(itemName, initialValue) {
+  //se usa la palabra 'item' porque todo lo que tiene que ver con localStorage se llama item
+  const localStorageItem = localStorage.getItem(itemName);
 
+  let parsedItem;
+
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = [];
+  } else {
+    parsedItem = JSON.parse(localStorageItem);
+  }
+
+  const [item, setItem] = React.useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    localStorage.setItem(itemName, JSON.stringify(newItem));
+    setItem(newItem);
+  };
+
+  return [item, saveItem];
+}
 
 //componente de REACT, siempre empieza con mayuscula
 function App() {
 
-  const localStorageTodos = localStorage.getItem('TODOS_V1')
-  let parsedTodos
-  if (!localStorageTodos){
-    localStorage.setItem('TODOS_V1', JSON.stringify([]))
-    parsedTodos = [];
-  } else {
-    parsedTodos = JSON.parse(localStorageTodos);
-
-  }
   //lo llame 'prop...' porque es la variable padre que se va a enviar a cada componente que este dentro de App(){}
-  const [propToDos, propSetPropToDos] = React.useState(parsedTodos);
+  const [propToDos, saveTodos] = useLocalStorage("TODOS_V1", []);
   const [propBuscadorValue, propSetBuscadorValue] = React.useState("");
   
   const contadorCompletados = propToDos.filter(
@@ -45,11 +57,7 @@ function App() {
     return toDoText.includes(buscadorText);
   })
   
-  const saveTodos = (newTodos) => {
-    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos))
-
-    propSetPropToDos(newTodos)
-  }
+  
   const completarToDo = (text) =>{
     const nuevosToDos = [...propToDos]
     const index = nuevosToDos.findIndex(
