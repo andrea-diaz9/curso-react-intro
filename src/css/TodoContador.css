@@ -9,3 +9,11 @@
 .TodoContador span{
     font-weight: bold;
 }
+
+.hidden{
+    display: none;
+}
+
+.Todos-completados{
+    display: block;
+}

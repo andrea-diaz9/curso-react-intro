@@ -17,11 +17,13 @@ function App() {
   //lo llame 'prop...' porque es la variable padre que se va a enviar a cada componente que este dentro de App(){}
   const [propToDos, propSetPropToDos] = React.useState(defaultTodos);
   const [propBuscadorValue, propSetBuscadorValue] = React.useState("");
-
+  
   const contadorCompletados = propToDos.filter(
     (parte) => !!parte.completado
   ).length;
   const totalTodos = propToDos.length;
+
+  const [propCompletados, propSetCompletados] = React.useState(false);
 
   const toDosBuscados = propToDos.filter((parte) => {
     const toDoText = parte.text.toLowerCase();
@@ -45,16 +47,28 @@ function App() {
   const borrarToDo = (text) => {
     const nuevosToDos = [...propToDos];
     const index = nuevosToDos.findIndex((parte) => parte.text === text);
-    nuevosToDos[index].completado = false;
+    nuevosToDos.splice(index, 1);
     propSetPropToDos(nuevosToDos);
-  };
+  }
+
+  React.useEffect(() => { 
+    const allDone = contadorCompletados === totalTodos && totalTodos > 0;
+    if (allDone && !propCompletados) { //que allDone sea true y propCompletados false para que no salte siempre la alerta
+      alert("¡Felicidades! Has completado todos tus TODOs.");
+    }
+    propSetCompletados(allDone);
+  }, [contadorCompletados, totalTodos, propCompletados, propSetCompletados]);
 
   //console.log(`Buscaste en TodoBuscador.js: \n'${propBuscadorValue}'`);
 
   return (
     //esto es .jsx (class(html)  = className(jsx))
     <>
-      <TodoContador completado={contadorCompletados} total={totalTodos} />
+      <TodoContador
+        completado={contadorCompletados}
+        total={totalTodos}
+        onCompletados={propCompletados}
+      />
 
       <TodoBuscador
         searchValue={propBuscadorValue}
