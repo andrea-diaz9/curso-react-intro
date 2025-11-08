@@ -6,16 +6,30 @@ import { TodoItem } from './TodoItem';
 import { CrearBotonTodo } from './CrearBotonTodo';
 import React from "react";
 
-const defaultTodos = [{ text: 'Cortar cebolla', completado: false},
+/* const defaultTodos = [{ text: 'Cortar cebolla', completado: false},
   { text: 'Ver curso de react', completado: true},
   { text: 'Completar curso de React', completado: false },
   { text: 'Salir', completado: false},
-]
+] 
+localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));  
+*/
+
+
 
 //componente de REACT, siempre empieza con mayuscula
 function App() {
+
+  const localStorageTodos = localStorage.getItem('TODOS_V1')
+  let parsedTodos
+  if (!localStorageTodos){
+    localStorage.setItem('TODOS_V1', JSON.stringify([]))
+    parsedTodos = [];
+  } else {
+    parsedTodos = JSON.parse(localStorageTodos);
+
+  }
   //lo llame 'prop...' porque es la variable padre que se va a enviar a cada componente que este dentro de App(){}
-  const [propToDos, propSetPropToDos] = React.useState(defaultTodos);
+  const [propToDos, propSetPropToDos] = React.useState(parsedTodos);
   const [propBuscadorValue, propSetBuscadorValue] = React.useState("");
   
   const contadorCompletados = propToDos.filter(
@@ -31,6 +45,11 @@ function App() {
     return toDoText.includes(buscadorText);
   })
   
+  const saveTodos = (newTodos) => {
+    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos))
+
+    propSetPropToDos(newTodos)
+  }
   const completarToDo = (text) =>{
     const nuevosToDos = [...propToDos]
     const index = nuevosToDos.findIndex(
@@ -41,14 +60,14 @@ function App() {
     } else {
       nuevosToDos[index].completado = true;
     }
-    propSetPropToDos(nuevosToDos)
+    saveTodos(nuevosToDos)
   }
 
   const borrarToDo = (text) => {
     const nuevosToDos = [...propToDos];
     const index = nuevosToDos.findIndex((parte) => parte.text === text);
     nuevosToDos.splice(index, 1);
-    propSetPropToDos(nuevosToDos);
+    saveTodos(nuevosToDos);
   }
 
   React.useEffect(() => { 
