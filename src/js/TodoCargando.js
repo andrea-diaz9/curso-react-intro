@@ -3,7 +3,6 @@ import '../css/TodoCargando.css'
 import { AiOutlineLoading } from "react-icons/ai";
 
 function TodoCargando() {
-    console.log('TodoCargando')
 
     return (
         <>
