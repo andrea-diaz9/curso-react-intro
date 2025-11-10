@@ -2,26 +2,49 @@ import React from 'react'
 
 //custom hook
 function useLocalStorage(itemName, initialValue) {
+
     //se usa la palabra 'item' porque todo lo que tiene que ver con localStorage se llama item
-    const localStorageItem = localStorage.getItem(itemName);
+    const [item, setItem] = React.useState(initialValue);
+    const [cargando, setCargando] = React.useState(true);
+    const [error, setError] = React.useState(false);
 
-    let parsedItem;
 
-    if (!localStorageItem) {
-        localStorage.setItem(itemName, JSON.stringify(initialValue));
-        parsedItem = [];
-    } else {
-        parsedItem = JSON.parse(localStorageItem);
-    }
+    React.useEffect(() => {
+        setTimeout(() => {
+            try {
+                const localStorageItem = localStorage.getItem(itemName);
 
-    const [item, setItem] = React.useState(parsedItem);
+                let parsedItem;
+
+                if (!localStorageItem) {
+                    localStorage.setItem(itemName, JSON.stringify(initialValue));
+                    parsedItem = initialValue;
+                } else {
+                    parsedItem = JSON.parse(localStorageItem);
+                    setItem(parsedItem);
+                }
+                setCargando(false);
+            } catch (err) {
+                setCargando(false);
+                setError(true);
+            }
+        }, 1500)
+    },)
+
+
 
     const saveItem = (newItem) => {
         localStorage.setItem(itemName, JSON.stringify(newItem));
         setItem(newItem);
-    };
+    }
+    //console.log(item)
 
-    return [item, saveItem];
+    return {
+        item,
+        saveItem,
+        cargando,
+        error
+    }
 }
 
 export { useLocalStorage }

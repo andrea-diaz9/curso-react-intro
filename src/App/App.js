@@ -17,9 +17,12 @@ localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
 
 //componente de REACT, siempre empieza con mayuscula
 function App() {
-
+  const {item: propToDos,
+          saveItem:  saveTodos,
+          cargando,
+          error
+  } = useLocalStorage("TODOS_V1", [])
   //lo llame 'prop...' porque es la variable padre que se va a enviar a cada componente que este dentro de App(){}
-  const [propToDos /* item */, saveTodos /* saveItem */] = useLocalStorage("TODOS_V1", []);
   const [propBuscadorValue, propSetBuscadorValue] = React.useState("");
   
   const contadorCompletados = propToDos.filter(
@@ -67,18 +70,20 @@ function App() {
 
   return (
     <>
-    <AppExport
-      contadorCompletados={contadorCompletados}
-      totalTodos={totalTodos}
-      propCompletados={propCompletados}
-      propBuscadorValue={propBuscadorValue}
-      propSetBuscadorValue={propSetBuscadorValue}
-      toDosBuscados={toDosBuscados}
-      completarToDo={completarToDo}
-      borrarToDo={borrarToDo}
-    />
-  </>
-  )
+      <AppExport
+        cargando={cargando}
+        error={error}
+        contadorCompletados={contadorCompletados}
+        totalTodos={totalTodos}
+        propCompletados={propCompletados}
+        propBuscadorValue={propBuscadorValue}
+        propSetBuscadorValue={propSetBuscadorValue}
+        toDosBuscados={toDosBuscados}
+        completarToDo={completarToDo}
+        borrarToDo={borrarToDo}
+      />
+    </>
+  );
 }
 
 
