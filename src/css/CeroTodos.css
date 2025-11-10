@@ -1,0 +1,14 @@
+.Parrafo{
+    text-align: center;
+    font-size: larger;
+    padding-top: 50px;
+}
+
+.arrow{
+    font-size: 150px; /* tamaño del icono (ajusta a tu gusto) */
+    width: 100%;
+    align-items: center;
+    transform-origin: center center;
+    margin-top: 20px;
+    color: #61DAFA;
+}

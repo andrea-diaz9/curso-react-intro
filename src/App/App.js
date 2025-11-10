@@ -5,13 +5,15 @@ import { AppExport } from './AppInfo'
 
 import React from "react";
 
-/* const defaultTodos = [{ text: 'Cortar cebolla', completado: false},
+/* 
+localStorage.removeItem('TODOS_V1')
+const defaultTodos = [{ text: 'Cortar cebolla', completado: false},
   { text: 'Ver curso de react', completado: true},
   { text: 'Completar curso de React', completado: false },
   { text: 'Dormir', completado: true},
   { text: 'Salir', completado: false},
 ] 
-localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));  
+localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos))
 */
 
 

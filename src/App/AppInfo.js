@@ -3,6 +3,9 @@ import { TodoBuscador } from "../js/TodoBuscador";
 import { TodoList } from "../js/TodoList";
 import { TodoItem } from "../js/TodoItem";
 import { CrearBotonTodo } from "../js/CrearBotonTodo";
+import { TodoCargando } from "../js/TodoCargando.js";
+import { TodoError } from "../js/TodoError.js";
+import { CeroTodos } from "../js/CeroTodos.js";
 
 function AppExport({
     cargando,
@@ -19,7 +22,7 @@ function AppExport({
     //esto es .jsx (class(html)  = className(jsx))
     return (
         <>
-        {cargando}
+            {cargando}
             <TodoContador
                 completado={contadorCompletados}
                 total={totalTodos}
@@ -32,13 +35,11 @@ function AppExport({
             />
 
             <TodoList>
-                {cargando && <p>Estamos cargando...</p>}
-                
-                {error && <p>Desesperate, hubo un error!!</p>}
+                {cargando && <TodoCargando />}
 
-                {!cargando && toDosBuscados === 0 && (
-                    <p>Crea un tu primer tarea! 😁</p>
-                )}
+                {error && <TodoError />}
+
+                {!cargando && totalTodos === 0 && <CeroTodos />}
                 {toDosBuscados.map((parte) => (
                     <TodoItem
                         key={parte.text}

@@ -1,0 +1,15 @@
+.cargandoIcon{
+    display: inline-block; /* necesario para que transform/animation se apliquen correctamente */
+    font-size: 150PX; /* tamaño del icono (ajusta a tu gusto) */
+    width: 100%;
+    align-items: center;
+    transform-origin: center center;
+    animation: spin 1s linear infinite; /* rotación continua */
+    margin-top: 20px;
+    color: #61DAFA;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
