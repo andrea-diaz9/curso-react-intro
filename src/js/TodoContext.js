@@ -8,7 +8,7 @@ function TodoProvider( { children } ){
         saveItem: saveTodos,
         cargando,
         error
-    } = useLocalStorage("TODOS_V1", [])
+    } = useLocalStorage("ToDo_Lista", [])
     //lo llame 'prop...' porque es la variable padre que se va a enviar a cada componente que este dentro de App(){}
     const [propBuscadorValue, propSetBuscadorValue] = React.useState("");
     const [propOpenModal, propSetOpenModal] = React.useState(false);
@@ -46,6 +46,15 @@ function TodoProvider( { children } ){
         saveTodos(nuevosToDos);
     }
 
+    const agregarTodo = (text)=>{
+        const nuevosToDos = [...propToDos]
+        nuevosToDos.push({
+            text: text,
+            completado: false
+        })
+        saveTodos(nuevosToDos)
+    }
+
     React.useEffect(() => {
         const allDone = contadorCompletados === totalTodos && totalTodos > 0;
         if (allDone && !propCompletados) { //que allDone sea true y propCompletados false para que no salte siempre la alerta
@@ -66,7 +75,8 @@ function TodoProvider( { children } ){
             completarToDo,
             borrarToDo,
             propOpenModal,
-            propSetOpenModal
+            propSetOpenModal,
+            agregarTodo
         }}>
             { children }
         </TodoContext.Provider>

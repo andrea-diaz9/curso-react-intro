@@ -7,7 +7,7 @@ function TodoBuscador(){
     propBuscadorValue: searchValue,
     propSetBuscadorValue: setSearchValue,} = React.useContext(TodoContext);
   return (
-    <input placeholder="Cortar cebolla"
+    <input placeholder="Buscando..."
       className='TodoBuscador'
       value={searchValue}
       onChange={(event) => { setSearchValue(event.target.value) }
