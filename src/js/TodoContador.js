@@ -1,8 +1,12 @@
+import React from 'react';
 import '../css/TodoContador.css'
+import { TodoContext} from './TodoContext';
 
-function TodoContador({ total, completado, onCompletados }) {
+function TodoContador() {
   //puede recibir props con el nombre que queramos
-
+  const { contadorCompletados: completado, 
+              totalTodos: total,
+              propCompletados: onCompletados } = React.useContext(TodoContext);
   return (
     
     <h1 className="TodoContador">
