@@ -11,6 +11,7 @@ function TodoProvider( { children } ){
     } = useLocalStorage("TODOS_V1", [])
     //lo llame 'prop...' porque es la variable padre que se va a enviar a cada componente que este dentro de App(){}
     const [propBuscadorValue, propSetBuscadorValue] = React.useState("");
+    const [propOpenModal, propSetOpenModal] = React.useState(false);
 
     const contadorCompletados = propToDos.filter(
         (parte) => !!parte.completado
@@ -63,7 +64,9 @@ function TodoProvider( { children } ){
             propSetBuscadorValue,
             toDosBuscados,
             completarToDo,
-            borrarToDo
+            borrarToDo,
+            propOpenModal,
+            propSetOpenModal
         }}>
             { children }
         </TodoContext.Provider>
