@@ -1,9 +1,7 @@
 import React from "react";
-import { useLocalStorage } from "./useLocalStorage";
+import { useLocalStorage } from "../js/useLocalStorage";
 
-const TodoContext = React.createContext()
-
-function TodoProvider( { children } ){
+function useTodos( ){
     const { item: propToDos,
         saveItem: saveTodos,
         cargando,
@@ -62,25 +60,21 @@ function TodoProvider( { children } ){
         }
         propSetCompletados(allDone);
     }, [contadorCompletados, totalTodos, propCompletados]); //solo pongo los estados en donde cuando cambien quiero que se ejecte la funcion
-    return (
-        <TodoContext.Provider value={{
-            cargando,
-            error,
-            contadorCompletados,
-            totalTodos,
-            propCompletados,
-            propBuscadorValue,
-            propSetBuscadorValue,
-            toDosBuscados,
-            completarToDo,
-            borrarToDo,
-            propOpenModal,
-            propSetOpenModal,
-            agregarTodo
-        }}>
-            { children }
-        </TodoContext.Provider>
-    )
+    return {
+        cargando,
+        error,
+        contadorCompletados,
+        totalTodos,
+        propCompletados,
+        propBuscadorValue,
+        propSetBuscadorValue,
+        toDosBuscados,
+        completarToDo,
+        borrarToDo,
+        propOpenModal,
+        propSetOpenModal,
+        agregarTodo
+    }
 }
 
-export { TodoContext, TodoProvider}
+export { useTodos }
