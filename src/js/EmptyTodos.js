@@ -1,7 +1,7 @@
-import "../css/CeroTodos.css";
+import "../css/EmptyTodos.css";
 import { CgArrowBottomRight } from "react-icons/cg";
 
-function CeroTodos() {
+function EmptyTodos() {
     return (
         <>
             <div>
@@ -14,4 +14,4 @@ function CeroTodos() {
     );
 }
 
-export { CeroTodos };
+export { EmptyTodos };

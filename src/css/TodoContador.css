@@ -17,3 +17,10 @@
 .Todos-completados{
     display: block;
 }
+
+.TodoContador--loading {
+    /* background: #E0E0E0;
+    border-color: #A5A5A5;
+    color: #7A7A7A; */
+    opacity: 25%;
+}

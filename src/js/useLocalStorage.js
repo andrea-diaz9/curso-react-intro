@@ -10,7 +10,8 @@ function useLocalStorage(itemName, initialValue) {
 
 
     React.useEffect(() => {
-        setTimeout(() => {
+        console.count('useLocalStorage effect run');
+        const timeoutId = setTimeout(() => {
             try {
                 const localStorageItem = localStorage.getItem(itemName);
 
@@ -28,8 +29,13 @@ function useLocalStorage(itemName, initialValue) {
                 setCargando(false);
                 setError(true);
             }
-        }, 1500)
-    },)
+        }, 3000);
+
+        return () => {
+            clearTimeout(timeoutId);
+            console.count('useLocalStorage cleanup');
+        };
+    }, [itemName]);
 
 
 
