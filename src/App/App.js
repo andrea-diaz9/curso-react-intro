@@ -31,12 +31,12 @@ function App() {
         agregarTodo } = useTodos()
   return (
     <>
-      <TodoHeader>
+      <TodoHeader cargando={cargando}>
         <TodoContador
           completado={contadorCompletados}
           total={totalTodos}
           onCompletados={propCompletados}
-          cargando = { cargando } />
+          /* cargando = { cargando } */ />
 
         <TodoBuscador
           searchValue={propBuscadorValue}
