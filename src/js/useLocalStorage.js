@@ -3,6 +3,7 @@ import React from 'react'
 //custom hook
 function useLocalStorage(itemName, initialValue) {
 
+    const [sincronizado, setSincronizado] = React.useState(true);
     //se usa la palabra 'item' porque todo lo que tiene que ver con localStorage se llama item
     const [item, setItem] = React.useState(initialValue);
     const [cargando, setCargando] = React.useState(true);
@@ -10,8 +11,7 @@ function useLocalStorage(itemName, initialValue) {
 
 
     React.useEffect(() => {
-        console.count('useLocalStorage effect run');
-        const timeoutId = setTimeout(() => {
+        setTimeout(() => {
             try {
                 const localStorageItem = localStorage.getItem(itemName);
 
@@ -22,20 +22,16 @@ function useLocalStorage(itemName, initialValue) {
                     parsedItem = initialValue;
                 } else {
                     parsedItem = JSON.parse(localStorageItem);
-                    setItem(parsedItem);
                 }
+                setItem(parsedItem);
                 setCargando(false);
+                setSincronizado(true);
             } catch (err) {
                 setCargando(false);
                 setError(true);
             }
-        }, 3000);
-
-        return () => {
-            clearTimeout(timeoutId);
-            console.count('useLocalStorage cleanup');
-        };
-    }, [itemName]);
+        }, 3000)
+    }, [sincronizado]);
 
 
 
@@ -44,12 +40,16 @@ function useLocalStorage(itemName, initialValue) {
         setItem(newItem);
     }
     //console.log(item)
-
+    const sincronizaInfo = () =>{
+        setCargando(true) //cuando sepamos que hubo un cambio se ponga a cargar
+        setSincronizado(false) //para que el efecto se pueda llamar y vuelva a renderizar la pagina
+    }
     return {
         item,
         saveItem,
         cargando,
-        error
+        error,
+        sincronizaInfo
     }
 }
 

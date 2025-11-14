@@ -2,8 +2,10 @@ import React from "react";
 import { useLocalStorage } from "../js/useLocalStorage";
 
 function useTodos( ){
-    const { item: propToDos,
+    const {
+        item: propToDos,
         saveItem: saveTodos,
+        sincronizaInfo: sincronizaTodos,
         cargando,
         error
     } = useLocalStorage("ToDo_Lista", [])
@@ -73,7 +75,8 @@ function useTodos( ){
         borrarToDo,
         propOpenModal,
         propSetOpenModal,
-        agregarTodo
+        agregarTodo,
+        sincronizaTodos
     }
 }
 

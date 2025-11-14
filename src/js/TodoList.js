@@ -1,7 +1,7 @@
 import '../css/TodoList.css'
 function TodoList( props){
 
-    console.log(props.totalTodos)
+    /* console.log(props.totalTodos) */
     /* console.count('TodoList render')
     console.log('toDosBuscados length:', props.toDosBuscados?.length) */
   
