@@ -14,7 +14,7 @@ function TodoList( props){
       {(!!props.totalTodos && !props.toDosBuscados.length) && props.onCeroResultados(props.textBuscador)}
       
       <ul className='TodoList'>
-        {props.toDosBuscados.map(props.render)}
+        {(!props.cargando && !props.error) && props.toDosBuscados.map(props.render)}
       </ul>
     </section>
   )
