@@ -11,7 +11,7 @@ import { TodoForm } from "../js/TodoForm.js";
 import { Modal } from "../js/Modal.js";
 import { useTodos } from "./useTodos.js";
 import { TodoHeader } from "../js/TodoHeader.js";
-import { ChangeAlertWithStorageListener  } from "../js/ChangeAlert.js";
+import { ChangeAlert  } from "../js/ChangeAlert.js";
 //componente de REACT, siempre empieza con mayuscula
 function App() {
   const { 
@@ -69,7 +69,7 @@ function App() {
       <CrearBotonTodo
         propSetOpenModal={propSetOpenModal} />
 
-      <ChangeAlertWithStorageListener
+      <ChangeAlert
         sincronizar={sincronizaTodos}
       />
 

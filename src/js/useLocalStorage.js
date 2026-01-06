@@ -3,7 +3,7 @@ import React from 'react'
 //custom hook
 function useLocalStorage(itemName, initialValue) {
 
-    const [sincronizado, setSincronizado] = React.useState(true);
+    const [sincronizado, setSincronizado] = React.useState(true); //avisa si las multiples paginas estan sincronizadas entre si
     //se usa la palabra 'item' porque todo lo que tiene que ver con localStorage se llama item
     const [item, setItem] = React.useState(initialValue);
     const [cargando, setCargando] = React.useState(true);
@@ -30,7 +30,7 @@ function useLocalStorage(itemName, initialValue) {
                 setCargando(false);
                 setError(true);
             }
-        }, 3000)
+        }, 1000)
     }, [sincronizado]);
 
 
